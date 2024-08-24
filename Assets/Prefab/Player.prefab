@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 112016509}
   ground_checker: {fileID: 5814433230025927996}
+  high: 0
 --- !u!50 &112016509
 Rigidbody2D:
   serializedVersion: 4

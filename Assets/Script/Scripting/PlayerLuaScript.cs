@@ -61,7 +61,7 @@ function OnHitGround()
     onGrund = true
 end";
 
-
+    public float high;
 
     void Awake()
     {

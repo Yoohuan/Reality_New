@@ -91,7 +91,15 @@ public class CameraContorller : MonoBehaviour
             {
                 pos_tmp = Vector3.Lerp(view_cam.transform.position, ScriptManager.Instance.player_instance.transform.position, cam_lerp_rate);
                 pos_tmp.z = -10;
-                view_cam.transform.position = pos_tmp;
+                if (pos_tmp.y < 1.36)
+                {
+                    view_cam.transform.position = pos_tmp;
+                }
+                else
+                {
+                    pos_tmp.y = 1.36f;
+                    view_cam.transform.position = pos_tmp;
+                }
             }
         }
     }

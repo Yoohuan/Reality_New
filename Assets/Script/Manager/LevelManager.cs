@@ -12,6 +12,9 @@ using static UIManager;
 public class LevelManager : MonoBehaviour, IModuleSelection
 {
     public GameObject currentSelectedModule; // 存储当前选中的模块
+    public GameObject deleteButton;
+    public Button deleteBtn;
+
 
     public static LevelManager Instance;
     public Transform startPoint;            // 起点位置
@@ -55,7 +58,20 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     // Start is called before the first frame update
     void Start()
     {
+        deleteBtn.onClick.AddListener(() =>
+        {
+            Debug.Log("delete");
+            foreach (TileBase t in selected)
+            {
+                tiles.Remove(t);
+                GameObject.Destroy(t.gameObject);
+            }
+            selected.Clear();
 
+
+
+            select_dirty = true;
+        });
     }
     enum Dir        // 方向枚举
     {
@@ -100,11 +116,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             {
                 m_dir = Dir.None;
                 //检测是否点击到了关卡物体
-                if(mode != OptMode.Start)
-                {
-                    RaycastHit2D cast_level = Physics2D.Raycast(m_world, Vector2.zero, 0f, LayerMask.GetMask("Level"));
-                    SelectObject(cast_level);
-                }
+                
             }
 
             if (mode == OptMode.Put)// 放置tile
@@ -128,6 +140,11 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
         if (Input.GetMouseButtonUp(0))
         {
+            if (mode != OptMode.Start)
+            {
+                RaycastHit2D cast_level = Physics2D.Raycast(m_world, Vector2.zero, 0f, LayerMask.GetMask("Level"));
+                SelectObject(cast_level);
+            }
             m_dir = Dir.None;
             select_dirty = true;                                                // 选择变更标记
         }
@@ -195,11 +212,22 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             mode = OptMode.Select;
         }
 
+        if (selected.Count == 0)
+        {
+            deleteButton.SetActive(false);
+        }
+        else
+        {
+            deleteButton.SetActive(true);
+        }
+
         tool_move.SetActive(selected.Count > 0);                                //激活移动工具
 
         tool_move.transform.position = select_center;
         m_last = m_world;
     }
+
+
 
     Vector3 select_center = Vector3.zero;
 
@@ -278,6 +306,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         UIManager.Instance.SetStartButtonIcon(start);
         if (start)
         {
+            unHighLightAllSelect();
+            selected.Clear();
             ScriptManager.Instance.CreatePlayer();
 
             UIManager.Instance.CloseGrid();
