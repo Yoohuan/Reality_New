@@ -207,6 +207,17 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             select_dirty = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            foreach (TileBase t in selected)
+            {
+                t.isLock = !t.isLock;
+            }
+            unHighLightAllSelect();
+            selected.Clear();
+            select_dirty = true;
+        }
+
         if (!start && Input.GetKeyDown(KeyCode.Escape))
         {
             mode = OptMode.Select;
@@ -254,6 +265,10 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         if (cast.collider)                                          // 如果点击了物体
         {
             tile = cast.collider.GetComponent<TileBase>();          // 获取物体的TileBase组件
+            if (tile.isLock)
+            {
+                return;
+            }
         }
 
         if (Input.GetKey(KeyCode.LeftShift))                        //多选
@@ -402,6 +417,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         //obj.Add("z", pos.z);
 
         obj.Add("id", GetIdInRegistry(tile.tileName));
+        obj.Add("isLock", tile.isLock);
 
         return obj;
     }
@@ -427,6 +443,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
 
         int id = (int)obj.GetValue("id");
+        bool isLock = (bool)obj.GetValue("isLock");
 
 
         if(id < 0 || id >= registries.Length)
@@ -438,6 +455,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             TileBase tile = registries[id];  // 源
             tile = Instantiate(tile);
             tile.transform.position = pos;
+            tile.isLock = isLock;
             tiles.Add(tile);
         }
     }
