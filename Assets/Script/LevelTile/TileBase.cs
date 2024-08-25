@@ -8,6 +8,7 @@ public class TileBase : MonoBehaviour
     public string tileName;        // 地图块的名称
     public string detail;
     public bool isLock;
+    public bool isUpdate;
 
     private bool isHighlighted;    // 地图块是否被高亮显示
 

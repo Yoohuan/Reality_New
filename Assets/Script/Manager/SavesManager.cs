@@ -62,6 +62,7 @@ public class SavesManager : MonoBehaviour
             string code = getStr(path.ToString() + "\\code.lua");
             writeStr(Application.dataPath + "\\PlayerScript\\player.lua", code);
             LevelManager.Instance.UnserializeLevel(getStr(path.ToString() + "\\map.json"));
+            LevelManager.Instance.UnserializeLevelLimit(getStr(path.ToString() + "\\mapLimit.json"));
             MsgBox.Instance.PushMsg("º”‘ÿ¥Êµµ", 1.5f);
         }
         else
@@ -80,6 +81,7 @@ public class SavesManager : MonoBehaviour
             string code = getStr(path.ToString() + "\\code.lua");
             writeStr(Application.dataPath + "\\PlayerScript\\player.lua", code);
             LevelManager.Instance.UnserializeLevel(getStr(path.ToString() + "\\map.json"));
+            LevelManager.Instance.UnserializeLevelLimit(getStr(path.ToString() + "\\mapLimit.json"));
             MsgBox.Instance.PushMsg("º”‘ÿ¥Êµµ", 1.5f);
         }
         else
@@ -98,6 +100,7 @@ public class SavesManager : MonoBehaviour
             string code = getStr(path.ToString() + "\\code.lua");
             writeStr(Application.dataPath + "\\PlayerScript\\player.lua", code);
             LevelManager.Instance.UnserializeLevel(getStr(path.ToString() + "\\map.json"));
+            LevelManager.Instance.UnserializeLevelLimit(getStr(path.ToString() + "\\mapLimit.json"));
             MsgBox.Instance.PushMsg("º”‘ÿ¥Êµµ", 1.5f);
         }
         else
@@ -117,7 +120,7 @@ public class SavesManager : MonoBehaviour
 
         writeStr(path.ToString() + "\\code.lua", code);
         writeStr(path.ToString() + "\\map.json", LevelManager.Instance.SerializeLevel());
-        writeStr(path.ToString() + "\\mapLimit.json", LevelManager.Instance.SerializeLevel());
+        writeStr(path.ToString() + "\\mapLimit.json", LevelManager.Instance.SerializeLevelLimit());
         MsgBox.Instance.PushMsg("“—±£¥Ê", 1.5f);
     }
 

@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     public GameObject currentSelectedModule; // 存储当前选中的模块
     public GameObject deleteButton;
     public Button deleteBtn;
+    public int limitOne;
+    public int limitTwo;
 
 
     public static LevelManager Instance;
@@ -125,7 +127,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
                 if (CheckInRange(m_world)) //超出范围不给放
                 {
                     TileBase t = UIManager.Instance.selectedModule;
-                    if (t)
+                    if (t && canPut(t))
                     {
                         print("put2");
                         GameObject obj = GameObject.Instantiate(t.gameObject);
@@ -303,6 +305,26 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         select_dirty = true;                                        //选择状态
     }
 
+    bool canPut(TileBase selectedModule)
+    {
+        int countOne = 0;
+        int countTwo = 0;
+        foreach (TileBase t in tiles)
+        {
+            if (!t.isLock && (GetIdInRegistry(t.tileName) == 0 || GetIdInRegistry(t.tileName) == 2))
+            { countOne++; }
+            else if (!t.isLock && (GetIdInRegistry(t.tileName) == 1 || GetIdInRegistry(t.tileName) == 3))
+            { countTwo++; }
+        }
+        if ((GetIdInRegistry(selectedModule.tileName) == 0 || GetIdInRegistry(selectedModule.tileName) == 2))
+        { countOne++; }
+        else if ((GetIdInRegistry(selectedModule.tileName) == 1 || GetIdInRegistry(selectedModule.tileName) == 3))
+        { countTwo++; }
+        if ((countOne <= limitOne) && (countTwo <= limitTwo))
+            return true;
+        return false;
+    }
+
     void unHighLightAllSelect()                                     // 取消所有物体的高亮显示
     {
         foreach (TileBase t in selected)
@@ -438,8 +460,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     {
         JObject obj = new JObject();
 
-        obj.Add("LimitOne", 2);
-        obj.Add("LimitTwo", 2);
+        obj.Add("LimitOne", limitOne);
+        obj.Add("LimitTwo", limitTwo);
 
         JArray jArray = new JArray();
         jArray.Add(obj);
@@ -494,5 +516,26 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         {
             Json2Tile((JObject)ts[i]);
         }
+    }
+
+    public void UnserializeLevelLimit(string str)
+    {
+        ClearMap();
+        JArray ts = (JArray)JsonConvert.DeserializeObject(str);
+
+
+
+        for (int i = 0; i < ts.Count; i++)
+        {
+            Json2Limit((JObject)ts[i]);
+        }
+    }
+
+    private void Json2Limit(JObject obj)
+    {
+        //JObject obj = new JObject(str);
+
+        limitOne = (int)obj.GetValue("LimitOne");
+        limitTwo = (int)obj.GetValue("LimitTwo");
     }
 }
