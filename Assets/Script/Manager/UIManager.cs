@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if(LevelManager.Instance.CurrMode == LevelManager.OptMode.Put && selectedModule != null)
+        if((LevelManager.Instance.CurrMode == LevelManager.OptMode.Put || LevelManager.Instance.CurrMode == LevelManager.OptMode.HiddenPut) && selectedModule != null)
         {
             imgShow.sprite = selectedModule.imgOnGui;
             imgShow.color = Color.white;

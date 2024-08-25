@@ -162,13 +162,21 @@ public class SavesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(LevelManager.Instance.CurrMode == LevelManager.OptMode.Start)
+        if((LevelManager.Instance.CurrMode == LevelManager.OptMode.Start) || (LevelManager.Instance.CurrMode == LevelManager.OptMode.HiddenStart))
         {
+            foreach (Button button in template)
+            {
+                button.interactable = false;
+            }
             saveButton.interactable = false;
             loadButton.interactable = false;
         }
         else
         {
+            foreach (Button button in template)
+            {
+                button.interactable = true;
+            }
             saveButton.interactable = true;
             loadButton.interactable = true;
         }

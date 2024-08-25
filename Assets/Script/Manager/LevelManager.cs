@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     public GameObject currentSelectedModule; // 存储当前选中的模块
     public GameObject deleteButton;
     public Button deleteBtn;
+    public Button hiddenBtn;
     public int limitOne;
     public int limitTwo;
 
@@ -49,7 +50,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
     public enum OptMode    // 操作模式的枚举
     {
-        Select, Put, Start
+        Select, Put, Start, HiddenSelect, HiddenPut, HiddenStart
     }
 
     private void Awake()
@@ -74,6 +75,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
             select_dirty = true;
         });
+        hiddenBtn.onClick.AddListener(SetHiddenMode);
     }
     enum Dir        // 方向枚举
     {
@@ -89,6 +91,14 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     // Update is called once per frame
     void Update()
     {
+        if ((mode == OptMode.Start) || (mode == LevelManager.OptMode.HiddenStart))
+        {
+            hiddenBtn.interactable = false;
+        }
+        else
+        {
+            hiddenBtn.interactable = true;
+        }
         Vector3 m_world = Camera.main.ScreenToWorldPoint(Input.mousePosition);  // 将鼠标位置转换为世界坐标系
         Vector3 mouse_delta = m_world - m_last;                                 // 鼠标移动的增量向量
         if (Input.GetMouseButtonDown(0))
@@ -138,11 +148,29 @@ public class LevelManager : MonoBehaviour, IModuleSelection
                 }
             }
 
+            if (mode == OptMode.HiddenPut)// 放置tile
+            {
+                print("put");
+                if (CheckInRange(m_world)) //超出范围不给放
+                {
+                    TileBase t = UIManager.Instance.selectedModule;
+                    if (t)
+                    {
+                        print("put2");
+                        GameObject obj = GameObject.Instantiate(t.gameObject);
+                        obj.transform.position = new Vector3(m_world.x, m_world.y, 0);
+                        t = obj.GetComponent<TileBase>();
+                        t.isHidden = true;
+                        tiles.Add(t);
+                    }
+                }
+            }
+
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (mode != OptMode.Start)
+            if (mode != OptMode.Start && mode != OptMode.HiddenStart)
             {
                 RaycastHit2D cast_level = Physics2D.Raycast(m_world, Vector2.zero, 0f, LayerMask.GetMask("Level"));
                 SelectObject(cast_level);
@@ -222,7 +250,10 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
         if (!start && Input.GetKeyDown(KeyCode.Escape))
         {
-            mode = OptMode.Select;
+            if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+            { mode = OptMode.Select; }
+            else
+            { mode = OptMode.HiddenSelect; }
         }
 
         if (selected.Count == 0)
@@ -287,7 +318,10 @@ public class LevelManager : MonoBehaviour, IModuleSelection
                     tile.SetHighLight(true);
                     selected.Add(tile);
                 }
-                mode = OptMode.Select;
+                if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+                { mode = OptMode.Select; }
+                else
+                { mode = OptMode.HiddenSelect; }
             }
         }
         else                                                        //单选
@@ -298,7 +332,10 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             {
                 tile.SetHighLight(true);
                 selected.Add(tile);
-                mode = OptMode.Select;
+                if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+                { mode = OptMode.Select; }
+                else
+                { mode = OptMode.HiddenSelect; }
             }
         }
 
@@ -311,9 +348,9 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         int countTwo = 0;
         foreach (TileBase t in tiles)
         {
-            if (!t.isLock && (GetIdInRegistry(t.tileName) == 0 || GetIdInRegistry(t.tileName) == 2))
+            if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 0 || GetIdInRegistry(t.tileName) == 2))
             { countOne++; }
-            else if (!t.isLock && (GetIdInRegistry(t.tileName) == 1 || GetIdInRegistry(t.tileName) == 3))
+            else if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 1 || GetIdInRegistry(t.tileName) == 3))
             { countTwo++; }
         }
         if ((GetIdInRegistry(selectedModule.tileName) == 0 || GetIdInRegistry(selectedModule.tileName) == 2))
@@ -350,7 +387,10 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             UIManager.Instance.CloseGrid();
             UIManager.Instance.ClosePanel();
 
-            mode = OptMode.Start;
+            if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+            { mode = OptMode.Start; }
+            else
+            { mode = OptMode.HiddenStart; }
         }
         else
         {
@@ -360,7 +400,10 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             UIManager.Instance.DrawGrid();
             UIManager.Instance.OnTilemapEditorClick();
 
-            mode = OptMode.Select;
+            if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+            { mode = OptMode.Select; }
+            else
+            { mode = OptMode.HiddenSelect; }
         }
 
         foreach(TileBase t in tiles)
@@ -382,7 +425,10 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         UIManager.Instance.DrawGrid();
         UIManager.Instance.OnTilemapEditorClick();
 
-        mode = OptMode.Select;
+        if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+        { mode = OptMode.Select; }
+        else
+        { mode = OptMode.HiddenSelect; }
 
         MsgBox.Instance.PushMsg(sucess ? "通关":"失败", 0.7f);
         foreach (TileBase t in tiles)
@@ -391,14 +437,43 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         }
     }
 
+    public void SetHiddenMode()
+    {
+        if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+        { 
+            mode = OptMode.HiddenSelect; 
+            foreach (TileBase t in tiles)
+            {
+                t.gameObject.SetActive(true);
+            }
+        }
+        else
+        { 
+            mode = OptMode.Select;
+            foreach (TileBase t in tiles)
+            {
+                if(t.isHidden)
+                {
+                    t.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
     public void SetSelectMode()
     {
-        mode = OptMode.Select;
+        if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+        { mode = OptMode.Select; }
+        else
+        { mode = OptMode.HiddenSelect; }
     }
 
     public void SetPutMode()
     {
-        mode = OptMode.Put;
+        if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+        { mode = OptMode.Put; }
+        else
+        { mode = OptMode.HiddenPut; }
     }
 
     public OptMode GetMode()
@@ -440,6 +515,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
         obj.Add("id", GetIdInRegistry(tile.tileName));
         obj.Add("isLock", tile.isLock);
+        obj.Add("isHidden", tile.isHidden);
 
         return obj;
     }
@@ -478,6 +554,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
         int id = (int)obj.GetValue("id");
         bool isLock = (bool)obj.GetValue("isLock");
+        bool isHidden = (bool)obj.GetValue("isHidden");
 
 
         if(id < 0 || id >= registries.Length)
@@ -490,6 +567,11 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             tile = Instantiate(tile);
             tile.transform.position = pos;
             tile.isLock = isLock;
+            tile.isHidden = isHidden;
+            if(isHidden)
+            {
+                tile.gameObject.SetActive(false);
+            }
             tiles.Add(tile);
         }
     }
