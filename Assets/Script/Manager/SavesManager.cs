@@ -13,6 +13,10 @@ public class SavesManager : MonoBehaviour
     private Button saveButton;
     [SerializeField]
     private Button loadButton;
+    [SerializeField]
+    private Button templateButton;
+    [SerializeField]
+    private Button[] template;
 
     [SerializeField]
     private InputField input;
@@ -27,6 +31,78 @@ public class SavesManager : MonoBehaviour
     {
         saveButton.onClick.AddListener(Save);
         loadButton.onClick.AddListener(Load);
+        templateButton.onClick.AddListener(SaveTemplate);
+        template[0].onClick.AddListener(LoadTemplate0);
+        template[1].onClick.AddListener(LoadTemplate1);
+        template[2].onClick.AddListener(LoadTemplate2);
+    }
+
+    private void SaveTemplate()
+    {
+        if (input.text == "") return;
+
+        DirectoryInfo path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves");
+        path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves\\" + input.text);
+
+        string code = CodeManager.GetString("PlayerScript\\player.lua");
+
+        writeStr(path.ToString() + "\\code.lua", code);
+        writeStr(path.ToString() + "\\map.json", LevelManager.Instance.SerializeLevel());
+        MsgBox.Instance.PushMsg("“—±£¥Ê", 1.5f);
+    }
+
+    private void LoadTemplate0()
+    {
+        DirectoryInfo path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves");
+        if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + input.text))
+        {
+            print("Load Level");
+            path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves\\" + "\\0\\");
+            string code = getStr(path.ToString() + "\\code.lua");
+            writeStr(Application.dataPath + "\\PlayerScript\\player.lua", code);
+            LevelManager.Instance.UnserializeLevel(getStr(path.ToString() + "\\map.json"));
+            MsgBox.Instance.PushMsg("º”‘ÿ¥Êµµ", 1.5f);
+        }
+        else
+        {
+            MsgBox.Instance.PushMsg("¥Êµµ≤ª¥Ê‘⁄", 1.5f);
+        }
+    }
+
+    private void LoadTemplate1()
+    {
+        DirectoryInfo path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves");
+        if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + input.text))
+        {
+            print("Load Level");
+            path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves\\" + "\\1\\");
+            string code = getStr(path.ToString() + "\\code.lua");
+            writeStr(Application.dataPath + "\\PlayerScript\\player.lua", code);
+            LevelManager.Instance.UnserializeLevel(getStr(path.ToString() + "\\map.json"));
+            MsgBox.Instance.PushMsg("º”‘ÿ¥Êµµ", 1.5f);
+        }
+        else
+        {
+            MsgBox.Instance.PushMsg("¥Êµµ≤ª¥Ê‘⁄", 1.5f);
+        }
+    }
+
+    private void LoadTemplate2()
+    {
+        DirectoryInfo path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves");
+        if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + input.text))
+        {
+            print("Load Level");
+            path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves\\" + "\\2\\");
+            string code = getStr(path.ToString() + "\\code.lua");
+            writeStr(Application.dataPath + "\\PlayerScript\\player.lua", code);
+            LevelManager.Instance.UnserializeLevel(getStr(path.ToString() + "\\map.json"));
+            MsgBox.Instance.PushMsg("º”‘ÿ¥Êµµ", 1.5f);
+        }
+        else
+        {
+            MsgBox.Instance.PushMsg("¥Êµµ≤ª¥Ê‘⁄", 1.5f);
+        }
     }
 
     private void Save()
