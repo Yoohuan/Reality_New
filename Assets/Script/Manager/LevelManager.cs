@@ -563,11 +563,14 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         }
         else
         {
+            Debug.Log("isput");
             TileBase tile = registries[id];  // Դ
             tile = Instantiate(tile);
             tile.transform.position = pos;
             tile.isLock = isLock;
             tile.isHidden = isHidden;
+            Debug.Log(tile.transform);
+
             if(isHidden)
             {
                 tile.gameObject.SetActive(false);
@@ -602,9 +605,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
     public void UnserializeLevelLimit(string str)
     {
-        ClearMap();
         JArray ts = (JArray)JsonConvert.DeserializeObject(str);
-
 
 
         for (int i = 0; i < ts.Count; i++)

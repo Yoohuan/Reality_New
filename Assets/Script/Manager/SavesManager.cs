@@ -55,7 +55,7 @@ public class SavesManager : MonoBehaviour
     private void LoadTemplate0()
     {
         DirectoryInfo path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves");
-        if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + input.text))
+        if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + "\\0\\"))
         {
             print("Load Level");
             path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves\\" + "\\0\\");
@@ -74,7 +74,7 @@ public class SavesManager : MonoBehaviour
     private void LoadTemplate1()
     {
         DirectoryInfo path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves");
-        if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + input.text))
+        if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + "\\1\\"))
         {
             print("Load Level");
             path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves\\" + "\\1\\");
@@ -93,7 +93,7 @@ public class SavesManager : MonoBehaviour
     private void LoadTemplate2()
     {
         DirectoryInfo path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves");
-        if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + input.text))
+        if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + "\\2\\"))
         {
             print("Load Level");
             path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves\\" + "\\2\\");
