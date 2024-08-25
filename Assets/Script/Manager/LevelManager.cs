@@ -434,6 +434,18 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         return tiles.ToString();
     }
 
+    public string SerializeLevelLimit() 
+    {
+        JObject obj = new JObject();
+
+        obj.Add("LimitOne", 2);
+        obj.Add("LimitTwo", 2);
+
+        JArray jArray = new JArray();
+        jArray.Add(obj);
+        return jArray.ToString();
+    }
+
 
     private void Json2Tile(JObject obj)
     {

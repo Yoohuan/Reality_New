@@ -48,6 +48,7 @@ public class SavesManager : MonoBehaviour
 
         writeStr(path.ToString() + "\\code.lua", code);
         writeStr(path.ToString() + "\\map.json", LevelManager.Instance.SerializeLevel());
+        writeStr(path.ToString() + "\\mapLimit.json", LevelManager.Instance.SerializeLevelLimit());
         MsgBox.Instance.PushMsg("已保存", 1.5f);
     }
 
@@ -116,6 +117,7 @@ public class SavesManager : MonoBehaviour
 
         writeStr(path.ToString() + "\\code.lua", code);
         writeStr(path.ToString() + "\\map.json", LevelManager.Instance.SerializeLevel());
+        writeStr(path.ToString() + "\\mapLimit.json", LevelManager.Instance.SerializeLevel());
         MsgBox.Instance.PushMsg("已保存", 1.5f);
     }
 
