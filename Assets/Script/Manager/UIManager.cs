@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     //public Button Obstacle2;
     //public Button Obstacle3;
     public TileBase selectedModule;
+    public Transform backgroundSquare;
 
 
     public GameObject panel;        //选择地图块面板
@@ -189,7 +190,7 @@ public class UIManager : MonoBehaviour
         float gridCellSize = levelManager.GetGridCellSize();
 
         // 定义不可编辑的行数
-        int editableRows = 3;
+        int editableRows = (int)(backgroundSquare.localScale.y/2 - 2);
 
         //计算网格的偏移量，使中心点位于0,0
         float xOffset = -gridSize.x * gridCellSize / 2;

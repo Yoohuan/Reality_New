@@ -13,12 +13,12 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 {
     public GameObject currentSelectedModule; // 存储当前选中的模块
     public GameObject deleteButton;
-    public Button deleteBtn;
-    public Button hiddenBtn;
-    public int limitOne;
-    public int limitTwo;
+    public Button deleteBtn;                 //删除按钮
+    public Button hiddenBtn;                 //附加模式按钮
+    public int limitOne;                     //类型一限制数量
+    public int limitTwo;                     //类型二限制数量
 
-
+    public Transform backgroundSquare;       //背景方块（读取大小）
     public static LevelManager Instance;
     public Transform startPoint;            // 起点位置
     public Transform endPoint;              // 终点位置
@@ -106,7 +106,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             drug_start_pos = m_world;
             //检测是否点击到了编辑器工具
             RaycastHit2D cast_tool = Physics2D.Raycast(m_world, Vector2.zero, 0f, LayerMask.GetMask("Editor"));
-
+            
             if (cast_tool.collider)                                             // 如果点击了编辑器工具
             {
                 switch (cast_tool.collider.name)
@@ -277,7 +277,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
     public bool CheckInRange(Vector3 pos)
     {
-        return Mathf.Abs(pos.x) <= 7 && pos.y >= -1.5f && pos.y <= 4.5f;
+        return Mathf.Abs(pos.x) <= (backgroundSquare.localScale.x / 2 - 0.5) && pos.y >= -1.5f && pos.y <= (backgroundSquare.localScale.y / 2 - 0.5);
     }
 
     void calSelectedCenter()                                        // 计算选择物体的中心点位置
@@ -489,7 +489,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     public Vector2Int GetGridSize()
     {
         // 返回地图的大小信息
-        return new Vector2Int(15, 10); // 假设地图的大小为15x10
+        return new Vector2Int((int)backgroundSquare.localScale.x, (int)backgroundSquare.localScale.y); // 假设地图的大小为15x10
     }
 
     public float GetGridCellSize()
@@ -538,6 +538,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
         obj.Add("LimitOne", limitOne);
         obj.Add("LimitTwo", limitTwo);
+        obj.Add("x", backgroundSquare.localScale.x);
+        obj.Add("y", backgroundSquare.localScale.y);
 
         JArray jArray = new JArray();
         jArray.Add(obj);
@@ -620,5 +622,15 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
         limitOne = (int)obj.GetValue("LimitOne");
         limitTwo = (int)obj.GetValue("LimitTwo");
+        float x = (float)obj.GetValue("x");
+        float y = (float)obj.GetValue("y");
+        float z = 1;
+        Vector3 scale = new Vector3(x, y, z);
+        backgroundSquare.localScale = scale;
+
+        Vector3 startPointPos = new Vector3(-x / 2 - 1, -0.25f, 0);
+        Vector3 endPointPos = new Vector3(x / 2 + 1, -0.25f, 0);
+        startPoint.parent.position = startPointPos;
+        endPoint.parent.position = endPointPos;
     }
 }

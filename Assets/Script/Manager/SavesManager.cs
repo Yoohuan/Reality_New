@@ -134,6 +134,7 @@ public class SavesManager : MonoBehaviour
             string code = getStr(path.ToString() + "\\code.lua");
             writeStr(Application.dataPath + "\\PlayerScript\\player.lua", code);
             LevelManager.Instance.UnserializeLevel(getStr(path.ToString() + "\\map.json"));
+            LevelManager.Instance.UnserializeLevelLimit(getStr(path.ToString() + "\\mapLimit.json"));
             MsgBox.Instance.PushMsg("º”‘ÿ¥Êµµ", 1.5f);
         }
         else

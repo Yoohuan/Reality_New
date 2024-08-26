@@ -206,8 +206,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1103414633}
   m_HandleRect: {fileID: 1103414632}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.9919436
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2240,6 +2240,7 @@ MonoBehaviour:
   hiddenBtn: {fileID: 2096567178}
   limitOne: 2
   limitTwo: 2
+  backgroundSquare: {fileID: 1906277571}
   startPoint: {fileID: 1655414043}
   endPoint: {fileID: 400995359}
   registries:
@@ -2511,7 +2512,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 5.64, y: 2}
   m_EdgeRadius: 0
 --- !u!4 &771023844
 Transform:
@@ -4814,7 +4815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -92.553825}
+  m_AnchoredPosition: {x: 0, y: -92.55382}
   m_SizeDelta: {x: 0, y: 165.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1488450498
@@ -5037,6 +5038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TilemapEditor: {fileID: 1140753882}
   selectedModule: {fileID: 0}
+  backgroundSquare: {fileID: 1906277571}
   panel: {fileID: 2048621645}
   levelManager: {fileID: 613597755}
   start_end_button: {fileID: 1488450501}
@@ -5653,7 +5655,7 @@ GameObject:
   - component: {fileID: 1906277571}
   - component: {fileID: 1906277570}
   m_Layer: 0
-  m_Name: Square
+  m_Name: BackgroundSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5720,7 +5722,7 @@ Transform:
   m_GameObject: {fileID: 1906277569}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 10, z: 1}
+  m_LocalScale: {x: 15, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
