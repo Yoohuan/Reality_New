@@ -540,6 +540,9 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         obj.Add("LimitTwo", limitTwo);
         obj.Add("x", backgroundSquare.localScale.x);
         obj.Add("y", backgroundSquare.localScale.y);
+        obj.Add("cameraMaxSize", CameraContorller.Instance.maxSize);
+        obj.Add("cameraMinSize", CameraContorller.Instance.minSize);
+        
 
         JArray jArray = new JArray();
         jArray.Add(obj);
@@ -620,6 +623,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     {
         //JObject obj = new JObject(str);
 
+        CameraContorller.Instance.maxSize = (int)obj.GetValue("cameraMaxSize");
+        CameraContorller.Instance.minSize = (int)obj.GetValue("cameraMinSize");
         limitOne = (int)obj.GetValue("LimitOne");
         limitTwo = (int)obj.GetValue("LimitTwo");
         float x = (float)obj.GetValue("x");

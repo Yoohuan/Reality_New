@@ -206,8 +206,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1103414633}
   m_HandleRect: {fileID: 1103414632}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9919436
+  m_Value: 0
+  m_Size: 0.47129223
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1294,6 +1294,8 @@ MonoBehaviour:
   view_cam: {fileID: 519420031}
   cam_lerp_rate: 0.05
   s: 0.0000018
+  maxSize: 20
+  minSize: 5
 --- !u!1 &302355757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4815,7 +4817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -92.55382}
+  m_AnchoredPosition: {x: 0, y: -87.14443}
   m_SizeDelta: {x: 0, y: 165.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1488450498

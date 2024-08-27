@@ -12,6 +12,8 @@ public class CameraContorller : MonoBehaviour
     private float cam_lerp_rate = 0.2f;
 
     public float s = 0.001f;        // 鼠标移动速度的缩放因子
+    public int maxSize;
+    public int minSize;
 
     //[SerializeField]
     //private GameObject tile_list;
@@ -51,7 +53,7 @@ public class CameraContorller : MonoBehaviour
         else                                 // 编辑模式
         {
             
-            target_orthographicSize = Mathf.Clamp(target_orthographicSize - Input.mouseScrollDelta.y * 0.5f, 3, 7);
+            target_orthographicSize = Mathf.Clamp(target_orthographicSize - Input.mouseScrollDelta.y * 0.5f, minSize, maxSize);
             view_cam.orthographicSize = Mathf.Lerp(view_cam.orthographicSize, target_orthographicSize, 0.12f);
             DragCamera();
         }
