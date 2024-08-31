@@ -1,0 +1,79 @@
+[
+  {
+    "x": -2.995749,
+    "y": 1.80950952,
+    "id": 2,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": 3.02773046,
+    "y": 1.80951214,
+    "id": 2,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": 0.00582930446,
+    "y": 5.60550356,
+    "id": 2,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": -9.40927,
+    "y": -0.7104982,
+    "id": 0,
+    "isLock": false,
+    "isHidden": false
+  },
+  {
+    "x": -5.742193,
+    "y": 0.463790327,
+    "id": 1,
+    "isLock": false,
+    "isHidden": false
+  },
+  {
+    "x": -0.488797,
+    "y": 0.999432,
+    "id": 0,
+    "isLock": false,
+    "isHidden": false
+  },
+  {
+    "x": 5.44445324,
+    "y": 4.357485,
+    "id": 3,
+    "isLock": false,
+    "isHidden": false
+  },
+  {
+    "x": -3.43482,
+    "y": 5.36696053,
+    "id": 2,
+    "isLock": false,
+    "isHidden": false
+  },
+  {
+    "x": 7.99904537,
+    "y": 0.711008847,
+    "id": 1,
+    "isLock": false,
+    "isHidden": true
+  },
+  {
+    "x": 1.736171,
+    "y": 3.88364959,
+    "id": 3,
+    "isLock": false,
+    "isHidden": true
+  },
+  {
+    "x": -11.5518332,
+    "y": 1.61747837,
+    "id": 0,
+    "isLock": false,
+    "isHidden": true
+  }
+]

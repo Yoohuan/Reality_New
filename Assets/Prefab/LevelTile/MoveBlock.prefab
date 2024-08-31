@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8655590022867742661}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7522678220616996295
 SpriteRenderer:
@@ -115,8 +115,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2563127312154483863}
   - {fileID: 8201057553963289896}
+  - {fileID: 2563127312154483863}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -160,6 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileName: "\u79FB\u52A8\u6805\u680F"
   detail: "\u6765\u56DE\u79FB\u52A8\uFF0C\u53EF\u8E29\u8E0F"
+  isLock: 0
+  isHidden: 0
   imgOnGui: {fileID: 21300000, guid: c90d810de3b19f54c8102f863ca5ccae, type: 3}
   highlight: {fileID: 1843600408035311081}
   edit_hited: {fileID: 1860891150281454135}
@@ -217,7 +219,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8655590022867742661}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8201057553963289899
 SpriteRenderer:

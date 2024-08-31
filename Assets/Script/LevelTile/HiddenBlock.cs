@@ -14,6 +14,7 @@ public class HiddenBlock : TileBase
 
     void Update()
     {
+        
     }
 
     public override void SetHighLight(bool b)

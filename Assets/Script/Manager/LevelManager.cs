@@ -13,10 +13,16 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 {
     public GameObject currentSelectedModule; // 存储当前选中的模块
     public GameObject deleteButton;
+    public GameObject endTile;
     public Button deleteBtn;                 //删除按钮
     public Button hiddenBtn;                 //附加模式按钮
+    public Button unHiddenBtn;               //普通模式按钮
+    public Button showHiddenBtn;             //显示附加物块
+    public Text modeShow;
     public int limitOne;                     //类型一限制数量
     public int limitTwo;                     //类型二限制数量
+    public Text limitOneText;
+    public Text limitTwoText;
 
     public Transform backgroundSquare;       //背景方块（读取大小）
     public static LevelManager Instance;
@@ -76,6 +82,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             select_dirty = true;
         });
         hiddenBtn.onClick.AddListener(SetHiddenMode);
+        unHiddenBtn.onClick.AddListener(SetUnHiddenMode);
     }
     enum Dir        // 方向枚举
     {
@@ -94,10 +101,14 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         if ((mode == OptMode.Start) || (mode == LevelManager.OptMode.HiddenStart))
         {
             hiddenBtn.interactable = false;
+            unHiddenBtn.interactable = false;
+            showHiddenBtn.interactable = true;
         }
         else
         {
             hiddenBtn.interactable = true;
+            unHiddenBtn.interactable = true;
+            showHiddenBtn.interactable = false;
         }
         Vector3 m_world = Camera.main.ScreenToWorldPoint(Input.mousePosition);  // 将鼠标位置转换为世界坐标系
         Vector3 mouse_delta = m_world - m_last;                                 // 鼠标移动的增量向量
@@ -162,6 +173,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
                         t = obj.GetComponent<TileBase>();
                         t.isHidden = true;
                         tiles.Add(t);
+                        Color32 color = t.gameObject.GetComponentInChildren<SpriteRenderer>().color;
+                        t.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color32(color.r, color.g, color.b, 130);
                     }
                 }
             }
@@ -269,6 +282,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
         tool_move.transform.position = select_center;
         m_last = m_world;
+        showMode();
+        CountTile_Text();
     }
 
 
@@ -348,14 +363,14 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         int countTwo = 0;
         foreach (TileBase t in tiles)
         {
-            if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 0 || GetIdInRegistry(t.tileName) == 2))
+            if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 0 || GetIdInRegistry(t.tileName) == 1))
             { countOne++; }
-            else if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 1 || GetIdInRegistry(t.tileName) == 3))
+            else if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 2 || GetIdInRegistry(t.tileName) == 3))
             { countTwo++; }
         }
-        if ((GetIdInRegistry(selectedModule.tileName) == 0 || GetIdInRegistry(selectedModule.tileName) == 2))
+        if ((GetIdInRegistry(selectedModule.tileName) == 0 || GetIdInRegistry(selectedModule.tileName) == 1))
         { countOne++; }
-        else if ((GetIdInRegistry(selectedModule.tileName) == 1 || GetIdInRegistry(selectedModule.tileName) == 3))
+        else if ((GetIdInRegistry(selectedModule.tileName) == 2 || GetIdInRegistry(selectedModule.tileName) == 3))
         { countTwo++; }
         if ((countOne <= limitOne) && (countTwo <= limitTwo))
             return true;
@@ -387,10 +402,11 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             UIManager.Instance.CloseGrid();
             UIManager.Instance.ClosePanel();
 
-            if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
-            { mode = OptMode.Start; }
-            else
-            { mode = OptMode.HiddenStart; }
+            foreach (TileBase t in tiles)
+            {
+                if (t.isHidden) t.gameObject.SetActive(false); ;
+            }
+            mode = OptMode.Start;
         }
         else
         {
@@ -439,25 +455,68 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
     public void SetHiddenMode()
     {
-        if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
-        { 
-            mode = OptMode.HiddenSelect; 
-            foreach (TileBase t in tiles)
+        mode = OptMode.HiddenSelect;
+        foreach (TileBase t in tiles)
+        {
+            if (t.isHidden)
             {
                 t.gameObject.SetActive(true);
+                Color32 color = t.gameObject.GetComponentInChildren<SpriteRenderer>().color;
+                t.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color32(color.r, color.g, color.b, 130);
             }
         }
-        else
-        { 
-            mode = OptMode.Select;
+
+    }
+
+    public void SetUnHiddenMode()
+    {
+        mode = OptMode.Select;
+        foreach (TileBase t in tiles)
+        {
+            if (t.isHidden)
+            {
+                t.gameObject.SetActive(false);
+            }
+        }
+
+    }
+
+    public void showHidden()
+    {
+        if (!start)
+        {
             foreach (TileBase t in tiles)
             {
-                if(t.isHidden)
+                if (t.isHidden)
                 {
-                    t.gameObject.SetActive(false);
+                    t.gameObject.SetActive(true);
+                    Color32 color = t.gameObject.GetComponentInChildren<SpriteRenderer>().color;
+                    t.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color32(color.r, color.g, color.b, 130);
                 }
             }
         }
+        else
+        {
+            mode = OptMode.HiddenStart;
+            foreach (TileBase t in tiles)
+            {
+                if (t.isHidden)
+                {
+                    t.gameObject.SetActive(true);
+                    Color32 color = t.gameObject.GetComponentInChildren<SpriteRenderer>().color;
+                    t.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color32(color.r, color.g, color.b, 255);
+                    t.OnStart();
+                }
+            }
+        }
+    }
+
+    public void showMode()
+    {
+        if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
+        { modeShow.text = "普通模式"; }
+        else
+        { modeShow.text = "附加模式"; }
     }
 
     public void SetSelectMode()
@@ -627,6 +686,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         CameraContorller.Instance.minSize = (int)obj.GetValue("cameraMinSize");
         limitOne = (int)obj.GetValue("LimitOne");
         limitTwo = (int)obj.GetValue("LimitTwo");
+        limitOneText.text = "平台数量：(    ) / ( " + limitOne.ToString() + " )";
+        limitTwoText.text = "平台数量：(    ) / ( " + limitTwo.ToString() + " )";
         float x = (float)obj.GetValue("x");
         float y = (float)obj.GetValue("y");
         float z = 1;
@@ -637,5 +698,21 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         Vector3 endPointPos = new Vector3(x / 2 + 1, -0.25f, 0);
         startPoint.parent.position = startPointPos;
         endPoint.parent.position = endPointPos;
+        endTile.transform.position = endPointPos + new Vector3( 0, 1, 0);
+    }
+
+    private void CountTile_Text()
+    {
+        int countOne = 0;
+        int countTwo = 0;
+        foreach (TileBase t in tiles)
+        {
+            if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 0 || GetIdInRegistry(t.tileName) == 1))
+            { countOne++; }
+            else if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 2 || GetIdInRegistry(t.tileName) == 3))
+            { countTwo++; }
+        }
+        limitOneText.text = "平台数量：( " + countOne.ToString() + " ) / ( " + limitOne.ToString() + " )";
+        limitTwoText.text = "平台数量：( " + countTwo.ToString() + " ) / ( " + limitTwo.ToString() + " )";
     }
 }

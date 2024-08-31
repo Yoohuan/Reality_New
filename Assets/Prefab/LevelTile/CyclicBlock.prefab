@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 8112450096489844147}
   m_Father: {fileID: 8655590022867742661}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7522678220616996295
 SpriteRenderer:
@@ -117,7 +117,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8655590022867742661}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1849629681266133105
 SpriteRenderer:
@@ -241,8 +241,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2563127312154483863}
   - {fileID: 1849629681266133104}
+  - {fileID: 2563127312154483863}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -286,6 +286,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileName: "\u574F\u6389\u7684\u544A\u793A\u724C"
   detail: "\u4F1A\u4ECE\u5929\u4E0A\u6389\u4E0B\u6765"
+  isLock: 0
+  isHidden: 0
   imgOnGui: {fileID: 21300000, guid: 1f08c61dfe40c3d4f8709445638e3211, type: 3}
   highlight: {fileID: 1843600408035311081}
   edit_hited: {fileID: 1860891150281454135}
