@@ -1,0 +1,30 @@
+[
+  {
+    "x": -4.08170271,
+    "y": 0.0214644074,
+    "id": 2,
+    "isLock": false,
+    "isHidden": true
+  },
+  {
+    "x": -1.68928123,
+    "y": 0.294425666,
+    "id": 1,
+    "isLock": false,
+    "isHidden": true
+  },
+  {
+    "x": 2.45330119,
+    "y": 0.454990447,
+    "id": 0,
+    "isLock": false,
+    "isHidden": true
+  },
+  {
+    "x": 0.430179536,
+    "y": 2.10881186,
+    "id": 0,
+    "isLock": false,
+    "isHidden": true
+  }
+]

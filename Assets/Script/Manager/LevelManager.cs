@@ -416,10 +416,17 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             UIManager.Instance.DrawGrid();
             UIManager.Instance.OnTilemapEditorClick();
 
-            if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
-            { mode = OptMode.Select; }
-            else
-            { mode = OptMode.HiddenSelect; }
+            foreach (TileBase t in tiles)
+            {
+                if (t.isHidden)
+                {
+                    t.gameObject.SetActive(true);
+                    Color32 color = t.gameObject.GetComponentInChildren<SpriteRenderer>().color;
+                    t.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color32(color.r, color.g, color.b, 130);
+                }
+            }
+
+            mode = OptMode.Select;
         }
 
         foreach(TileBase t in tiles)
@@ -471,13 +478,13 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     public void SetUnHiddenMode()
     {
         mode = OptMode.Select;
-        foreach (TileBase t in tiles)
-        {
-            if (t.isHidden)
-            {
-                t.gameObject.SetActive(false);
-            }
-        }
+        //foreach (TileBase t in tiles)
+        //{
+        //    if (t.isHidden)
+        //    {
+        //        t.gameObject.SetActive(false);
+        //    }
+        //}
 
     }
 
@@ -637,7 +644,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
             if(isHidden)
             {
-                tile.gameObject.SetActive(false);
+                Color32 color = tile.gameObject.GetComponentInChildren<SpriteRenderer>().color;
+                tile.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color32(color.r, color.g, color.b, 130);
             }
             tiles.Add(tile);
         }
@@ -686,8 +694,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         CameraContorller.Instance.minSize = (int)obj.GetValue("cameraMinSize");
         limitOne = (int)obj.GetValue("LimitOne");
         limitTwo = (int)obj.GetValue("LimitTwo");
-        limitOneText.text = "平台数量：(    ) / ( " + limitOne.ToString() + " )";
-        limitTwoText.text = "平台数量：(    ) / ( " + limitTwo.ToString() + " )";
+        limitOneText.text = "平台数量：     /  " + limitOne.ToString() + " ";
+        limitTwoText.text = "障碍数量：     /  " + limitTwo.ToString() + " ";
         float x = (float)obj.GetValue("x");
         float y = (float)obj.GetValue("y");
         float z = 1;
@@ -712,7 +720,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             else if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 2 || GetIdInRegistry(t.tileName) == 3))
             { countTwo++; }
         }
-        limitOneText.text = "平台数量：( " + countOne.ToString() + " ) / ( " + limitOne.ToString() + " )";
-        limitTwoText.text = "平台数量：( " + countTwo.ToString() + " ) / ( " + limitTwo.ToString() + " )";
+        limitOneText.text = "平台数量： " + countOne.ToString() + "  /  " + limitOne.ToString() + " ";
+        limitTwoText.text = "障碍数量： " + countTwo.ToString() + "  /  " + limitTwo.ToString() + " ";
     }
 }

@@ -48,7 +48,7 @@ public class CameraContorller : MonoBehaviour
 
         if (LevelManager.Instance.IsPlaying) // play模式
         {
-
+            
         }
         else                                 // 编辑模式
         {
@@ -88,6 +88,8 @@ public class CameraContorller : MonoBehaviour
     {
         if (LevelManager.Instance.IsPlaying) // play模式
         {
+            target_orthographicSize = Mathf.Clamp(target_orthographicSize - Input.mouseScrollDelta.y * 0.5f, minSize, maxSize);
+            view_cam.orthographicSize = Mathf.Lerp(view_cam.orthographicSize, target_orthographicSize, 0.12f);
             view_cam.orthographicSize = Mathf.Lerp(view_cam.orthographicSize, 4.3f, cam_lerp_rate*2);
             if (ScriptManager.Instance.player_instance)
             {

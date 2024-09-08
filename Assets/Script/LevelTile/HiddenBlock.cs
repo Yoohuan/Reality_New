@@ -14,7 +14,10 @@ public class HiddenBlock : TileBase
 
     void Update()
     {
-        
+        if (isHidden)
+        {
+            animator.SetBool("isHidden", true);
+        }
     }
 
     public override void SetHighLight(bool b)

@@ -211,5 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileName: "\u57FA\u7840\u65B9\u5757"
   detail: "\u7528\u4E8E\u8E2E\u811A"
+  isLock: 0
+  isHidden: 0
   imgOnGui: {fileID: 2021935202, guid: 5fe5454ec8605de43809133b020d1b69, type: 3}
   highlight: {fileID: 1226083187888713861}
