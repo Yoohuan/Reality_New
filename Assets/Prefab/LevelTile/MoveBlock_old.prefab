@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 713548893
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 1, b: 0.21950889, a: 0.33333334}
@@ -157,8 +157,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 713548893
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1043207387, guid: 5fe5454ec8605de43809133b020d1b69, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -211,10 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileName: "\u79FB\u52A8\u6805\u680F"
   detail: "\u6765\u56DE\u79FB\u52A8\uFF0C\u53EF\u8E29\u8E0F"
-  isLock: 0
-  isHidden: 0
   imgOnGui: {fileID: 21300000, guid: c90d810de3b19f54c8102f863ca5ccae, type: 3}
   highlight: {fileID: 6073190019608302939}
-  edit_hited: {fileID: 0}
-  playing_collider: {fileID: 0}
-  animator: {fileID: 0}
+  moveSpeed: 1

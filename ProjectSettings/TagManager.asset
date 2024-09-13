@@ -20,7 +20,7 @@ TagManager:
   - Editor
   - Player2
   - LevelStatic
-  - BG
+  - 
   - 
   - 
   - 
@@ -43,7 +43,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Level
-    uniqueID: 713548893
     locked: 0
