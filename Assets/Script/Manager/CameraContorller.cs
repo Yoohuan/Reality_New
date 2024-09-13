@@ -101,7 +101,7 @@ public class CameraContorller : MonoBehaviour
                 }
                 else
                 {
-                    pos_tmp.y = 1.36f;
+                    //pos_tmp.y = 1.36f;
                     view_cam.transform.position = pos_tmp;
                 }
             }
