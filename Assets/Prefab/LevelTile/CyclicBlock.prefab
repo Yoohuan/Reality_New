@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1843600408035311081}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.0089, z: 0}
-  m_LocalScale: {x: 1.05, y: 1.6702466, z: 1}
+  m_LocalScale: {x: 0.39, y: 1.6702466, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8112450096489844147}
@@ -160,12 +160,12 @@ SpriteRenderer:
   m_SortingLayerID: 713548893
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1334688, guid: 5006248d779f190409eb67d03b9fc368, type: 3}
+  m_Sprite: {fileID: 247689269, guid: 5006248d779f190409eb67d03b9fc368, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.25, y: 0.75}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -184,18 +184,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.060921192, y: -0.23063016}
+  m_Offset: {x: 0.010040045, y: -0.23063016}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.75, y: 0.75}
-    newSize: {x: 0.25, y: 0.75}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1692848, y: 1.5957332}
+  m_Size: {x: 0.4602245, y: 1.5957332}
   m_EdgeRadius: 0
 --- !u!114 &7167382809381673128
 MonoBehaviour:
@@ -270,7 +270,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 0.4200575, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &5911473816465389017
 MonoBehaviour:
@@ -288,7 +288,7 @@ MonoBehaviour:
   detail: "\u4F1A\u4ECE\u5929\u4E0A\u6389\u4E0B\u6765"
   isLock: 0
   isHidden: 0
-  imgOnGui: {fileID: -1334688, guid: 5006248d779f190409eb67d03b9fc368, type: 3}
+  imgOnGui: {fileID: 247689269, guid: 5006248d779f190409eb67d03b9fc368, type: 3}
   highlight: {fileID: 1843600408035311081}
   edit_hited: {fileID: 1860891150281454135}
   playing_collider: {fileID: 1849629681266133106}

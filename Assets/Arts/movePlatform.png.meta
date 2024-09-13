@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5006248d779f190409eb67d03b9fc368
+guid: 3a3b78f8940bd6e4892fc539c570ccc0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 53
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tile_0104_0
+      name: movePlatform_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 53
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5bd3108049ff034084136a6e376826f
-      internalID: 247689269
+      spriteID: 680963a46e3bfa942879277768737479
+      internalID: -1235359612
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tile_0104_0: 247689269
+      movePlatform_0: -1235359612
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
