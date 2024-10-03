@@ -1,10 +1,10 @@
 [
   {
-    "LimitOne": 5,
+    "LimitOne": 4,
     "LimitTwo": 3,
-    "x": 22.0,
-    "y": 20.0,
-    "cameraMaxSize": 8,
+    "x": 23.0,
+    "y": 18.0,
+    "cameraMaxSize": 10,
     "cameraMinSize": 5
   }
 ]
