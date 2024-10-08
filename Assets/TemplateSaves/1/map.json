@@ -1,1 +1,65 @@
-[]
+[
+  {
+    "x": -0.493400633,
+    "y": 4.250462,
+    "id": 2,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": -0.5329622,
+    "y": 2.17844915,
+    "id": 2,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": 0.451448083,
+    "y": 2.141844,
+    "id": 2,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": 0.5429352,
+    "y": 4.189137,
+    "id": 2,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": -9.434114,
+    "y": 6.49599171,
+    "id": 0,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": -8.46734,
+    "y": 6.49598837,
+    "id": 0,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": 7.505475,
+    "y": 0.44313705,
+    "id": 0,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": 8.51428,
+    "y": 0.4851691,
+    "id": 0,
+    "isLock": true,
+    "isHidden": false
+  },
+  {
+    "x": 8.514279,
+    "y": 1.4939785,
+    "id": 0,
+    "isLock": true,
+    "isHidden": false
+  }
+]
