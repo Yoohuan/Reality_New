@@ -11,26 +11,26 @@ using static UIManager;
 
 public class LevelManager : MonoBehaviour, IModuleSelection
 {
-    public GameObject currentSelectedModule; // ´æ´¢µ±Ç°Ñ¡ÖĞµÄÄ£¿é
+    public GameObject currentSelectedModule; // å­˜å‚¨å½“å‰é€‰ä¸­çš„æ¨¡å—
     public GameObject deleteButton;
     public GameObject endTile;
-    public Button deleteBtn;                 //É¾³ı°´Å¥
-    public Button hiddenBtn;                 //¸½¼ÓÄ£Ê½°´Å¥
-    public Button unHiddenBtn;               //ÆÕÍ¨Ä£Ê½°´Å¥
-    public Button showHiddenBtn;             //ÏÔÊ¾¸½¼ÓÎï¿é
+    public Button deleteBtn;                 //åˆ é™¤æŒ‰é’®
+    public Button hiddenBtn;                 //é™„åŠ æ¨¡å¼æŒ‰é’®
+    public Button unHiddenBtn;               //æ™®é€šæ¨¡å¼æŒ‰é’®
+    public Button showHiddenBtn;             //æ˜¾ç¤ºé™„åŠ ç‰©å—
     public Text modeShow;
-    public int limitOne;                     //ÀàĞÍÒ»ÏŞÖÆÊıÁ¿
-    public int limitTwo;                     //ÀàĞÍ¶şÏŞÖÆÊıÁ¿
+    public int limitOne;                     //ç±»å‹ä¸€é™åˆ¶æ•°é‡
+    public int limitTwo;                     //ç±»å‹äºŒé™åˆ¶æ•°é‡
     public Text limitOneText;
     public Text limitTwoText;
 
-    public Transform backgroundSquare;       //±³¾°·½¿é£¨¶ÁÈ¡´óĞ¡£©
+    public Transform backgroundSquare;       //èƒŒæ™¯æ–¹å—ï¼ˆè¯»å–å¤§å°ï¼‰
     public static LevelManager Instance;
-    public Transform startPoint;            // ÆğµãÎ»ÖÃ
-    public Transform endPoint;              // ÖÕµãÎ»ÖÃ
+    public Transform startPoint;            // èµ·ç‚¹ä½ç½®
+    public Transform endPoint;              // ç»ˆç‚¹ä½ç½®
 
-    public TileBase[] registries;         // µØ¿é×¢²á±í
-    public List<TileBase> tiles;            // ÍßÆ¬
+    public TileBase[] registries;         // åœ°å—æ³¨å†Œè¡¨
+    public List<TileBase> tiles;            // ç“¦ç‰‡
 
     public int GetIdInRegistry(string name)
     {
@@ -42,19 +42,19 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     }
 
 
-    float grid_space = 1f;                  // Íø¸ñ¼ä¾à
+    float grid_space = 1f;                  // ç½‘æ ¼é—´è·
 
     [SerializeField]
-    private GameObject tool_move;           // ÒÆ¶¯¹¤¾ß
+    private GameObject tool_move;           // ç§»åŠ¨å·¥å…·
 
 
     [SerializeField]
-    private OptMode mode = OptMode.Select;  // µ±Ç°²Ù×÷Ä£Ê½
+    private OptMode mode = OptMode.Select;  // å½“å‰æ“ä½œæ¨¡å¼
     public OptMode CurrMode { get { return mode; } }
-    Vector3 m_last;                         // ÉÏÒ»Ö¡Êó±êµÄÊÀ½ç×ø±ê
+    Vector3 m_last;                         // ä¸Šä¸€å¸§é¼ æ ‡çš„ä¸–ç•Œåæ ‡
 
 
-    public enum OptMode    // ²Ù×÷Ä£Ê½µÄÃ¶¾Ù
+    public enum OptMode    // æ“ä½œæ¨¡å¼çš„æšä¸¾
     {
         Select, Put, Start, HiddenSelect, HiddenPut, HiddenStart
     }
@@ -84,7 +84,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         hiddenBtn.onClick.AddListener(SetHiddenMode);
         unHiddenBtn.onClick.AddListener(SetUnHiddenMode);
     }
-    enum Dir        // ·½ÏòÃ¶¾Ù
+    enum Dir        // æ–¹å‘æšä¸¾
     {
         None, XY, X, Y
     }
@@ -110,15 +110,15 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             unHiddenBtn.interactable = true;
             showHiddenBtn.interactable = false;
         }
-        Vector3 m_world = Camera.main.ScreenToWorldPoint(Input.mousePosition);  // ½«Êó±êÎ»ÖÃ×ª»»ÎªÊÀ½ç×ø±êÏµ
-        Vector3 mouse_delta = m_world - m_last;                                 // Êó±êÒÆ¶¯µÄÔöÁ¿ÏòÁ¿
+        Vector3 m_world = Camera.main.ScreenToWorldPoint(Input.mousePosition);  // å°†é¼ æ ‡ä½ç½®è½¬æ¢ä¸ºä¸–ç•Œåæ ‡ç³»
+        Vector3 mouse_delta = m_world - m_last;                                 // é¼ æ ‡ç§»åŠ¨çš„å¢é‡å‘é‡
         if (Input.GetMouseButtonDown(0))
         {
             drug_start_pos = m_world;
-            //¼ì²âÊÇ·ñµã»÷µ½ÁË±à¼­Æ÷¹¤¾ß
+            //æ£€æµ‹æ˜¯å¦ç‚¹å‡»åˆ°äº†ç¼–è¾‘å™¨å·¥å…·
             RaycastHit2D cast_tool = Physics2D.Raycast(m_world, Vector2.zero, 0f, LayerMask.GetMask("Editor"));
             
-            if (cast_tool.collider)                                             // Èç¹ûµã»÷ÁË±à¼­Æ÷¹¤¾ß
+            if (cast_tool.collider)                                             // å¦‚æœç‚¹å‡»äº†ç¼–è¾‘å™¨å·¥å…·
             {
                 switch (cast_tool.collider.name)
                 {
@@ -135,16 +135,16 @@ public class LevelManager : MonoBehaviour, IModuleSelection
                         break;
                 }
             }
-            else                                                                // Èç¹ûÃ»ÓĞ
+            else                                                                // å¦‚æœæ²¡æœ‰
             {
                 m_dir = Dir.None;
-                //¼ì²âÊÇ·ñµã»÷µ½ÁË¹Ø¿¨ÎïÌå
+                //æ£€æµ‹æ˜¯å¦ç‚¹å‡»åˆ°äº†å…³å¡ç‰©ä½“
                 
             }
 
-            if (mode == OptMode.Put)// ·ÅÖÃtile
+            if (mode == OptMode.Put)// æ”¾ç½®tile
             {
-                if (CheckInRange(m_world)) //³¬³ö·¶Î§²»¸ø·Å
+                if (CheckInRange(m_world)) //è¶…å‡ºèŒƒå›´ä¸ç»™æ”¾
                 {
                     TileBase t = UIManager.Instance.selectedModule;
                     if (t && canPut(t))
@@ -157,10 +157,10 @@ public class LevelManager : MonoBehaviour, IModuleSelection
                 }
             }
 
-            if (mode == OptMode.HiddenPut)// ·ÅÖÃtile
+            if (mode == OptMode.HiddenPut)// æ”¾ç½®tile
             {
                 print("put");
-                if (CheckInRange(m_world)) //³¬³ö·¶Î§²»¸ø·Å
+                if (CheckInRange(m_world)) //è¶…å‡ºèŒƒå›´ä¸ç»™æ”¾
                 {
                     TileBase t = UIManager.Instance.selectedModule;
                     if (t)
@@ -187,19 +187,19 @@ public class LevelManager : MonoBehaviour, IModuleSelection
                 SelectObject(cast_level);
             }
             m_dir = Dir.None;
-            select_dirty = true;                                                // Ñ¡Ôñ±ä¸ü±ê¼Ç
+            select_dirty = true;                                                // é€‰æ‹©å˜æ›´æ ‡è®°
         }
 
         if (select_dirty)
         {
-            select_dirty = false;                                               // ÖØÖÃ±ä¸ü±ê¼Ç
+            select_dirty = false;                                               // é‡ç½®å˜æ›´æ ‡è®°
             if (selected.Count > 0) UIManager.Instance.DrawGrid();
             else UIManager.Instance.CloseGrid();
-            calSelectedCenter();                                                // ¼ÆËãÑ¡ÔñÎïÌåµÄÖĞĞÄµã
+            calSelectedCenter();                                                // è®¡ç®—é€‰æ‹©ç‰©ä½“çš„ä¸­å¿ƒç‚¹
         }
         
 
-        if (Input.GetMouseButton(0))                                            // Êó±ê×ó¼üÒ»Ö±°´ÏÂÊ±
+        if (Input.GetMouseButton(0))                                            // é¼ æ ‡å·¦é”®ä¸€ç›´æŒ‰ä¸‹æ—¶
         {
 
             switch (m_dir)
@@ -230,7 +230,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
                 {
                     t.transform.position = t.transform.position + mouse_delta;
                 }
-                select_center += mouse_delta;// ¸üĞÂÑ¡ÔñÎïÌåµÄÖĞĞÄµãÎ»ÖÃ
+                select_center += mouse_delta;// æ›´æ–°é€‰æ‹©ç‰©ä½“çš„ä¸­å¿ƒç‚¹ä½ç½®
             }
         }
 
@@ -276,7 +276,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             deleteButton.SetActive(true);
         }
 
-        tool_move.SetActive(selected.Count > 0);                                //¼¤»îÒÆ¶¯¹¤¾ß
+        tool_move.SetActive(selected.Count > 0);                                //æ¿€æ´»ç§»åŠ¨å·¥å…·
 
         tool_move.transform.position = select_center;
         m_last = m_world;
@@ -293,7 +293,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         return Mathf.Abs(pos.x) <= (backgroundSquare.localScale.x / 2 - 0.5) && pos.y >= -1.5f && pos.y <= (backgroundSquare.localScale.y / 2 - 0.5);
     }
 
-    void calSelectedCenter()                                        // ¼ÆËãÑ¡ÔñÎïÌåµÄÖĞĞÄµãÎ»ÖÃ
+    void calSelectedCenter()                                        // è®¡ç®—é€‰æ‹©ç‰©ä½“çš„ä¸­å¿ƒç‚¹ä½ç½®
     {
         select_center = Vector3.zero;
         foreach (TileBase t in selected)
@@ -302,16 +302,16 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         }
     }
 
-    private bool select_dirty = false;                              // ÊÇ·ñÑ¡Ôñ
+    private bool select_dirty = false;                              // æ˜¯å¦é€‰æ‹©
 
-    public HashSet<TileBase> selected = new HashSet<TileBase>();    // Ñ¡ÔñµÄÎïÌå¼¯ºÏ
-    void SelectObject(RaycastHit2D cast)                            // Ñ¡ÔñÎïÌå
+    public HashSet<TileBase> selected = new HashSet<TileBase>();    // é€‰æ‹©çš„ç‰©ä½“é›†åˆ
+    void SelectObject(RaycastHit2D cast)                            // é€‰æ‹©ç‰©ä½“
     {
         TileBase tile = null;
-        if (cast.collider)                                          // Èç¹ûµã»÷ÁËÎïÌå
+        if (cast.collider)                                          // å¦‚æœç‚¹å‡»äº†ç‰©ä½“
         {
             Debug.Log(cast.collider);
-            tile = cast.collider.GetComponent<TileBase>();          // »ñÈ¡ÎïÌåµÄTileBase×é¼ş
+            tile = cast.collider.GetComponent<TileBase>();          // è·å–ç‰©ä½“çš„TileBaseç»„ä»¶
             Debug.Log(tile);
             if (tile.isLock)
             {
@@ -319,7 +319,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             }
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))                        //¶àÑ¡
+        if (Input.GetKey(KeyCode.LeftShift))                        //å¤šé€‰
         {
             if (tile)
             {
@@ -339,7 +339,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
                 { mode = OptMode.HiddenSelect; }
             }
         }
-        else                                                        //µ¥Ñ¡
+        else                                                        //å•é€‰
         {
             unHighLightAllSelect();
             selected.Clear();
@@ -354,7 +354,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             }
         }
 
-        select_dirty = true;                                        //Ñ¡Ôñ×´Ì¬
+        select_dirty = true;                                        //é€‰æ‹©çŠ¶æ€
     }
 
     bool canPut(TileBase selectedModule)
@@ -377,7 +377,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         return false;
     }
 
-    void unHighLightAllSelect()                                     // È¡ÏûËùÓĞÎïÌåµÄ¸ßÁÁÏÔÊ¾
+    void unHighLightAllSelect()                                     // å–æ¶ˆæ‰€æœ‰ç‰©ä½“çš„é«˜äº®æ˜¾ç¤º
     {
         foreach (TileBase t in selected)
         {
@@ -453,7 +453,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         else
         { mode = OptMode.HiddenSelect; }
 
-        MsgBox.Instance.PushMsg(sucess ? "Í¨¹Ø":"Ê§°Ü", 0.7f);
+        MsgBox.Instance.PushMsg(sucess ? "é€šå…³":"å¤±è´¥", 0.7f);
         foreach (TileBase t in tiles)
         {
             t.OnEnd(sucess);
@@ -521,9 +521,9 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     public void showMode()
     {
         if (mode == OptMode.Select || mode == OptMode.Put || mode == OptMode.Start)
-        { modeShow.text = "ÆÕÍ¨Ä£Ê½"; }
+        { modeShow.text = "æ™®é€šæ¨¡å¼"; }
         else
-        { modeShow.text = "¸½¼ÓÄ£Ê½"; }
+        { modeShow.text = "é™„åŠ æ¨¡å¼"; }
     }
 
     public void SetSelectMode()
@@ -548,20 +548,20 @@ public class LevelManager : MonoBehaviour, IModuleSelection
     }
     public Vector3 GetGridPosition()
     {
-        // ·µ»ØµØÍ¼µÄÎ»ÖÃĞÅÏ¢
-        return new Vector3(0, 0, 0); // ¼ÙÉèµØÍ¼µÄÎ»ÖÃÎª(0, 0, 0)
+        // è¿”å›åœ°å›¾çš„ä½ç½®ä¿¡æ¯
+        return new Vector3(0, 0, 0); // å‡è®¾åœ°å›¾çš„ä½ç½®ä¸º(0, 0, 0)
     }
 
     public Vector2Int GetGridSize()
     {
-        // ·µ»ØµØÍ¼µÄ´óĞ¡ĞÅÏ¢
-        return new Vector2Int((int)backgroundSquare.localScale.x, (int)backgroundSquare.localScale.y); // ¼ÙÉèµØÍ¼µÄ´óĞ¡Îª15x10
+        // è¿”å›åœ°å›¾çš„å¤§å°ä¿¡æ¯
+        return new Vector2Int((int)backgroundSquare.localScale.x, (int)backgroundSquare.localScale.y); // å‡è®¾åœ°å›¾çš„å¤§å°ä¸º15x10
     }
 
     public float GetGridCellSize()
     {
-        // ·µ»ØÍø¸ñµ¥ÔªµÄ´óĞ¡
-        return 1f; // ¼ÙÉèÃ¿¸öÍø¸ñµ¥ÔªµÄ´óĞ¡Îª1
+        // è¿”å›ç½‘æ ¼å•å…ƒçš„å¤§å°
+        return 1f; // å‡è®¾æ¯ä¸ªç½‘æ ¼å•å…ƒçš„å¤§å°ä¸º1
     }
 
     public GameObject GetCurrentSelectedModule()
@@ -635,7 +635,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         else
         {
             Debug.Log("isput");
-            TileBase tile = registries[id];  // Ô´
+            TileBase tile = registries[id];  // æº
             tile = Instantiate(tile);
             tile.transform.position = pos;
             tile.isLock = isLock;
@@ -694,8 +694,8 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         CameraContorller.Instance.minSize = (int)obj.GetValue("cameraMinSize");
         limitOne = (int)obj.GetValue("LimitOne");
         limitTwo = (int)obj.GetValue("LimitTwo");
-        limitOneText.text = "Æ½Ì¨ÊıÁ¿£º     /  " + limitOne.ToString() + " ";
-        limitTwoText.text = "ÕÏ°­ÊıÁ¿£º     /  " + limitTwo.ToString() + " ";
+        limitOneText.text = "å¹³å°æ•°é‡ï¼š     /  " + limitOne.ToString() + " ";
+        limitTwoText.text = "éšœç¢æ•°é‡ï¼š     /  " + limitTwo.ToString() + " ";
         float x = (float)obj.GetValue("x");
         float y = (float)obj.GetValue("y");
         float z = 1;
@@ -720,7 +720,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
             else if (!t.isLock && !t.isHidden && (GetIdInRegistry(t.tileName) == 2 || GetIdInRegistry(t.tileName) == 3))
             { countTwo++; }
         }
-        limitOneText.text = "Æ½Ì¨ÊıÁ¿£º " + countOne.ToString() + "  /  " + limitOne.ToString() + " ";
-        limitTwoText.text = "ÕÏ°­ÊıÁ¿£º " + countTwo.ToString() + "  /  " + limitTwo.ToString() + " ";
+        limitOneText.text = "å¹³å°æ•°é‡ï¼š " + countOne.ToString() + "  /  " + limitOne.ToString() + " ";
+        limitTwoText.text = "éšœç¢æ•°é‡ï¼š " + countTwo.ToString() + "  /  " + limitTwo.ToString() + " ";
     }
 }
