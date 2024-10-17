@@ -39,11 +39,18 @@ end
 function Update()
 
     v = self:GetVelocity()
+    r = self:GetRotation()
     input = self:GetInput()
 
     if Input.GetKeyDown(KeyCode.Space) and onGrund then
         onGrund = false
         v.y = 12
+    end
+
+    if v.x > 0.1 then
+        self:SetRotation(self:GetLeftRotation())
+    else if v.x < -0.1 then
+        self:SetRotation(self:GetRightRotation())
     end
 
     self:SetVelocity(input.x * 5, v.y)
@@ -87,6 +94,7 @@ end";
 UnityEngine = CS.UnityEngine
 Vector3 = UnityEngine.Vector3
 Vector2 = UnityEngine.Vector2
+Quaternion = UnityEngine.Quaternion
 GameObject = UnityEngine.GameObject
 Input = UnityEngine.Input
 Time = UnityEngine.Time
@@ -178,6 +186,24 @@ KeyCode = UnityEngine.KeyCode
     public Vector2 GetVelocity()
     {
         return rigidbody.velocity;
+    }
+    
+    public Quaternion GetRotation()
+    {
+
+        return transform.localRotation;
+    }
+    public Quaternion GetLeftRotation()
+    {
+        return Quaternion.Euler(0, 0, 0);
+    }
+    public Quaternion GetRightRotation()
+    {
+        return Quaternion.Euler(0, 180, 0);
+    }
+    public void SetRotation(Quaternion r)
+    {
+        transform.localRotation = r;
     }
 
     public bool IsOnGround()

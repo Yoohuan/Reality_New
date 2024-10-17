@@ -159,13 +159,11 @@ public class LevelManager : MonoBehaviour, IModuleSelection
 
             if (mode == OptMode.HiddenPut)// 放置tile
             {
-                print("put");
                 if (CheckInRange(m_world)) //超出范围不给放
                 {
                     TileBase t = UIManager.Instance.selectedModule;
                     if (t)
                     {
-                        print("put2");
                         GameObject obj = GameObject.Instantiate(t.gameObject);
                         obj.transform.position = new Vector3(m_world.x, m_world.y, 0);
                         t = obj.GetComponent<TileBase>();
@@ -310,9 +308,7 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         TileBase tile = null;
         if (cast.collider)                                          // 如果点击了物体
         {
-            Debug.Log(cast.collider);
             tile = cast.collider.GetComponent<TileBase>();          // 获取物体的TileBase组件
-            Debug.Log(tile);
             if (tile.isLock)
             {
                 return;
@@ -634,13 +630,11 @@ public class LevelManager : MonoBehaviour, IModuleSelection
         }
         else
         {
-            Debug.Log("isput");
             TileBase tile = registries[id];  // 源
             tile = Instantiate(tile);
             tile.transform.position = pos;
             tile.isLock = isLock;
             tile.isHidden = isHidden;
-            Debug.Log(tile.transform);
 
             if(isHidden)
             {

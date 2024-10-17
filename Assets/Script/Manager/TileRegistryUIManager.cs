@@ -44,6 +44,7 @@ public class TileRegistryUIManager : MonoBehaviour
             if (buttonText != null)
             {
                 buttonText.text = registries[i].tileName;
+                buttonText.color = Color.black;
             }
 
            

@@ -3,7 +3,13 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Assets/Script/LevelTile/TileBase.cs" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Assets/Script/LevelTile/TileOnGUI.cs" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Assets/Script/Manager/CameraContorller.cs" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Assets/Script/Manager/CodeManager.cs" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Assets/Script/Manager/LevelManager.cs" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Assets/Script/Manager/SavesManager.cs" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/Assets/Script/Manager/TileRegistryUIManager.cs" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Assets/Script/Manager/UIManager.cs" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Assets/Script/Scripting/PlayerLuaScript.cs" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/Assets/XLua/Src/LuaEnv.cs" charset="GB2312" />
   </component>
 </project>

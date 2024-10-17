@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a886ba1c173b18a468f61b794034a149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileName: "\u79FB\u52A8\u6805\u680F"
+  tileName: "\u79FB\u52A8\u4E91\u6735"
   detail: "\u6765\u56DE\u79FB\u52A8\uFF0C\u53EF\u8E29\u8E0F"
   isLock: 0
   isHidden: 0

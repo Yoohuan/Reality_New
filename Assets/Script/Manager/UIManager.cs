@@ -77,6 +77,7 @@ public class UIManager : MonoBehaviour
             imgShow.sprite = selectedModule.imgOnGui;
             imgShow.color = Color.white;
             name_discript.text = selectedModule.detail;
+            name_discript.color = Color.green;
         }
         else
         {

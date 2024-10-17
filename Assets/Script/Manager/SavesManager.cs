@@ -57,7 +57,6 @@ public class SavesManager : MonoBehaviour
         DirectoryInfo path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves");
         if (Directory.Exists(Application.dataPath + "\\TemplateSaves\\" + "\\0\\"))
         {
-            print("Load Level");
             path = Directory.CreateDirectory(Application.dataPath + "\\TemplateSaves\\" + "\\0\\");
             string code = getStr(path.ToString() + "\\code.lua");
             writeStr(Application.dataPath + "\\PlayerScript\\player.lua", code);
@@ -129,7 +128,6 @@ public class SavesManager : MonoBehaviour
         DirectoryInfo path = Directory.CreateDirectory(Application.dataPath + "\\Saves");
         if(Directory.Exists(Application.dataPath + "\\Saves\\" + input.text))
         {
-            print("Load Level");
             path = Directory.CreateDirectory(Application.dataPath + "\\Saves\\" + input.text);
             string code = getStr(path.ToString() + "\\code.lua");
             writeStr(Application.dataPath + "\\PlayerScript\\player.lua", code);
